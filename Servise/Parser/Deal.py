@@ -1,5 +1,6 @@
 from .Engine import Engine
 from bs4 import BeautifulSoup
+import csv
 
 class Deal(object):
     def Parser(html):
@@ -17,12 +18,12 @@ class Deal(object):
                 
                 if link == None:
                     link = "Private seller or out of stock"
-                
-                listObjects.append(name)
-                listObjects.append(price)
-                listObjects.append(link)      
+
+                listObjects.append(
+                {'name':name,
+                 'price':price,
+                 'link':link,})                              
                 
             except:
                 pass
-
         return listObjects

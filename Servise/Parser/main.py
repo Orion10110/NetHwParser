@@ -5,8 +5,9 @@ import threading
 
 def main():
    
-    switchThread = threading.Thread(target = Deal.Parser,args=(Engine.getHtml("https://deal.by/Kommutatory?a16295=183763&a16295=183764&a16295=183762&a16295=183765&price_local__gte=1&sort=price"),))
-    cableThread = threading.Thread(target = Deal.Parser,args=(Engine.getHtml("https://deal.by/Kabel-telefonnyj?a5527=120606&sort=price"),))
+    listObject =[]
+    switchThread = threading.Thread(target = Deal.Parser,args=(Engine.getHtml("https://deal.by/Kommutatory?a16295=183763&a16295=183764&a16295=183762&a16295=183765&price_local__gte=1&sort=price"),listObject,))
+    cableThread = threading.Thread(target = Deal.Parser,args=(Engine.getHtml("https://deal.by/Kabel-telefonnyj?a5527=120606&sort=price"),listObject,))
 
     switchThread.start()    
    # cableThread.start()
