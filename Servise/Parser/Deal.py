@@ -14,6 +14,8 @@ class Deal(object):
             try:
                 name = elements.find('a',class_="x-gallery-tile__name").text
                 price = str(elements.find('div',class_="x-gallery-tile__price").text).strip()
+                price = price.replace(" руб.","")
+                float(price)
                 link = elements.find('div',class_="x-gallery-tile__extra").find('a').get('href')
                 
                 if link == None:
