@@ -51,3 +51,12 @@ class Engine(ABC):
         }.get(info['speed'])
         route = "https://deal.by/Kabel-telefonnyj?sort=price&price_local__lte={}&{}".format(info['cost'],type);
         return Deal.Parser(Engine.getHtml(route))
+
+    def getRouterInfo(info,listObjects):
+        return listObjects.update({'routers':Engine.getRouter(info)})
+
+    def getCablesInfo(info,listObjects):
+        return listObjects.update({'cables':Engine.getCables(info)})
+
+    def getSwitchInfo(info,listObjects):
+        return listObjects.update({'switch':Engine.getSwitch(info)})
