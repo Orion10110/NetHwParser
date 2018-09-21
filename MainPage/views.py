@@ -1,4 +1,5 @@
 import sys
+import threading
 sys.path.append("../")
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -12,9 +13,24 @@ def page(request):
     return render(request,'MainPage/index.html')
 
 def router(request):
-    print(request)
-    switch = Deal.Parser(Engine.getHtml("https://deal.by/Kommutatory?a16295=183763&a16295=183764&a16295=183762&a16295=183765&price_local__gte=1&sort=price"))
-    routers = Deal.Parser(Engine.getHtml("https://deal.by/Marshrutizatory?sort=price"))
-    cables = Deal.Parser(Engine.getHtml("https://deal.by/Kabel-telefonnyj?sort=price&a5527=120606&price_local__gte=1"))
-    listObjects ={'routers':routers ,'cables':cables ,'switch':switch }
+
+    listObjects = {'routers':None,
+                   'cables':None,
+                   'switch':None}        
+
+    info = Engine.parseRequest(request)
+
+    routerThread = threading.Thread(target = Engine.getRouterInfo,args=(info,listObjects,))
+    cableThread = threading.Thread(target = Engine.getCablesInfo,args=(info,listObjects,))
+    switchThread = threading.Thread(target = Engine.getSwitchInfo,args=(info,listObjects,))
+    
+
+    routerThread.start()
+    cableThread.start()
+    switchThread.start()
+
+    routerThread.join()
+    cableThread.join()
+    switchThread.join()
+
     return JsonResponse(listObjects)
