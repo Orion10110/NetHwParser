@@ -27,3 +27,34 @@ html {
     width: 70%;
     padding: 20px;
 }
+
+.md-list-item-text.hardware-item__wrapper{
+    flex-direction: row;
+}
+
+.hardware-item__info{
+    display: flex;
+    flex-direction: column;
+}
+
+.hardware{
+    display: flex;
+}
+.hardware__list{
+    width: 60%;
+}
+
+.hardware__tabs{
+    width: 40%;
+}
+
+.harware__total{
+    font-weight: bold;
+    color: #ed0cfe;
+}
+
+
+.harware__cost{
+    font-weight: bold;
+    color: #ed0cfe;
+}

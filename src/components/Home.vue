@@ -6,18 +6,18 @@
       </div>
       <md-field>
         <label>Cost</label>
-        <md-input type="number" v-model="info.cost"></md-input>
+        <md-input type="number" v-model="cost"></md-input>
       </md-field>
       <md-field>
         <label>Count of port</label>
-        <md-input type="number" v-model="info.port"></md-input>
+        <md-input type="number" v-model="port"></md-input>
       </md-field>
       <md-field>
         <label for="speed">Network capacity</label>
-        <md-select v-model="info.speed" name="speed" id="speed">
-          <md-option value="100m">100 MBit</md-option>
-          <md-option value="1g">1 GBit</md-option>
-          <md-option value="10g">10 GBit</md-option>
+        <md-select v-model="speed" name="speed" id="speed">
+          <md-option value="100">100 MBit</md-option>
+          <md-option value="1000">1 GBit</md-option>
+          <md-option value="10000">10 GBit</md-option>
         </md-select>
       </md-field>
       <md-button @click="getHardware" class="md-raised md-primary">Find</md-button>
@@ -26,25 +26,36 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
-  data: function () {
-    return {
-      info: {
-        cost: null,
-        port: null,
-        speed: '100m'
+  computed: {
+    cost: {
+      get () {
+        return this.$store.state.cost
+      },
+      set (value) {
+        this.$store.commit('setCost', value)
+      }
+    },
+    speed: {
+      get () {
+        return this.$store.state.speed
+      },
+      set (value) {
+        this.$store.commit('setSpeed', value)
+      }
+    },
+    port: {
+      get () {
+        return this.$store.state.port
+      },
+      set (value) {
+        this.$store.commit('setPort', value)
       }
     }
   },
   methods: {
-    getHardware: function () {
-      axios.get('http://localhost:8000/router', {params: this.info})
-        .then((resp) => this.success(resp))
-    },
-    success: function (resp) {
-      console.log(resp)
+    getHardware () {
+      this.$router.push({name: 'Hardware', params: { c: this.cost, p: this.port, s: this.speed }})
     }
   }
 }

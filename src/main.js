@@ -6,9 +6,10 @@ import router from './router'
 import 'normalize.css'
 import '@/assets/css/style.css'
 import VueMaterial from 'vue-material'
+import store from './store'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
-// import './assets/css/style.css'
+import './assets/css/style.css'
 
 Vue.use(VueMaterial)
 
@@ -17,6 +18,7 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  store,
   router,
   components: { App },
   template: '<App/>'
