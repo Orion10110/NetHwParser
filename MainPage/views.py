@@ -22,8 +22,7 @@ def router(request):
 
     routerThread = threading.Thread(target = Engine.getRouterInfo,args=(info,listObjects,))
     cableThread = threading.Thread(target = Engine.getCablesInfo,args=(info,listObjects,))
-    switchThread = threading.Thread(target = Engine.getSwitchInfo,args=(info,listObjects,))
-    
+    switchThread = threading.Thread(target = Engine.getSwitchInfo,args=(info,listObjects,))    
 
     routerThread.start()
     cableThread.start()

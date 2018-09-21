@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
-import csv
 
-class Deal(object):
+class Deal(object):      
+
     def Parser(html):
         try:
             soup = BeautifulSoup(html,"html.parser")
@@ -16,17 +16,19 @@ class Deal(object):
                 price = str(elements.find('div',class_="x-gallery-tile__price").text).strip()
                 link = elements.find('div',class_="x-gallery-tile__extra").find('a').get('href')
                 urlImage = elements.find('img',class_="x-image-holder__img").get('src')
+
                 price = price.replace(" руб.","")
                 float(price)               
                 if link == None:
-                    link = "Private seller or out of stock"
-
+                    link = "Private seller or out of stock"  
+                
                 listObjects.append(
                 {'name':name,
                  'price':price,
                  'link':link,
-                 'image':urlImage})                              
+                 'image':urlImage})
                 
             except:
                 pass
+
         return listObjects
